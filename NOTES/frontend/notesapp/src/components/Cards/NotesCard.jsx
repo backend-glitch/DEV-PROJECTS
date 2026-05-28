@@ -26,8 +26,9 @@ const  NotesCard = ({title,level, date,content, tags, isPinned, onEdit, onDelete
                   
                 </div>
 
-
+               <div className="ml-40 mb-8">
               <MdOutlinePushPin className={`icon-btn ${isPinned ? 'text-secondary' : 'text-slate-500' }` } />
+              </div>
 
             </div>
 
