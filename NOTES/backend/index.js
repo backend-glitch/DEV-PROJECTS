@@ -5,6 +5,11 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 dotenv.config();
 
+
+import authRouter from "./routes/auth.routes.js";
+import noteRouter from "./routes/note.routes.js"
+
+
 //db
 connectDB();
 
@@ -17,6 +22,10 @@ app.use(cors());
 app.get("/", (req, res) => {
     res.send("API Working");
 });
+
+app.use("/notes/auth",authRouter);
+app.use("/notes",noteRouter);
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
