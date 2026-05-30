@@ -4,12 +4,13 @@ import {useNavigate} from "react-router-dom";
 import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import { useLocation } from "react-router-dom";
+import { FaGithub } from "react-icons/fa6";
 
 const Navbar = ({handleSearch, onClearSearch,searchQuery,selectedLevel,handleLevelFilter}) => {
 
   const location = useLocation();
 
-  const hideUI = location.pathname === "/login" || location.pathname === "/signUp";
+  const hideUI = location.pathname === "/login" || location.pathname === "/signup";
 
   
   // const[filteredNotes, setFilteredNotes] = useState("");
@@ -55,6 +56,9 @@ const Navbar = ({handleSearch, onClearSearch,searchQuery,selectedLevel,handleLev
      />
 
      <ProfileInfo onLogout={onLogout} />
+
+     
+
     </>
     )}
        </div>

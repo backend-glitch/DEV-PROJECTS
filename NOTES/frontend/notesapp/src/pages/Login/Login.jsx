@@ -6,6 +6,17 @@ import { validateEmail } from "../../utils/helper";
 import { FaAppStoreIos } from "react-icons/fa6";
 import api from "../../api/axios.js";
 
+import lottieReact from "lottie-react";
+import loginAnimation from "../../assets/login.json";
+import toast from "react-hot-toast";
+import { FaGithub } from "react-icons/fa6";
+
+import GithubIcon from "../../components/icons/GithubIcon.jsx";
+
+//console.log(Lottie)
+//console.log(loginAnimation);
+
+const Lottie = lottieReact.default;
 
 const Login = () => {
 
@@ -48,6 +59,8 @@ const handleLogin = async (e) => {
      localStorage.setItem("user", JSON.stringify(res.data.user));
 
         navigate("/dashboard"); 
+        toast.success("Login Successfull");
+
 
         console.log(res.data);
 
@@ -64,43 +77,67 @@ const handleLogin = async (e) => {
     }
 };
 
-    return (
-        <>
-        <Navbar />
+   return (
+  <>
+    <Navbar />
 
-        <div className="flex items-center justify-center mt-28">
-            <div className="w-96 border rounded bg-white px-7 py-10" >
-              <form onSubmit={handleLogin}>
-                <h4 className="text-2xl mb-7">Login</h4>
+    <div className="min-h-[80vh] flex flex-col lg:flex-row items-center justify-center gap-12 px-6">
 
-                
-                <input type="text"
-                 placeholder="Email"
-                  className="input-box"
-                  value={email} onChange={(e) => setemail(e.target.value)}
-                  />
-                <PasswordInput  value ={password} onChange={(e) => setPassword(e.target.value)}/>
+      {/* Lottie Animation */}
+      <div className="w-full max-w-md">
+        <Lottie
+          animationData={loginAnimation}
+          loop={true}
+        />
+      </div>
 
-                    {error && <p className="text-red-500 text-xs pb-1">{error}</p>}
+      {/* Login Form */}
+      <div className="w-96 border rounded bg-white px-7 py-10 shadow-md">
+        <form onSubmit={handleLogin}>
+          <h4 className="text-2xl mb-7">Login</h4>
 
+          <input
+            type="text"
+            placeholder="Email"
+            className="input-box"
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+          />
 
-                <button type="submit" className="btn-primary">
-                    LOGIN
-                </button>
+          <PasswordInput
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-                <p className="text-sm text-center mt-4">
-                    Not registered yet?{" "}
-                     <Link to="/SignUp" className="font-medium text-secondary underline">
-                        Create a Account
-                    </Link>
+          {error && (
+            <p className="text-red-500 text-xs pb-1">
+              {error}
+            </p>
+          )}
 
-                </p>
-                </form>    
-            </div>
-        </div>
-        </>
-       // <div>Login</div>
-    )
+          <button type="submit" className="btn-primary">
+            LOGIN
+          </button>
+
+          <p className="text-sm text-center mt-4">
+            Not registered yet?{" "}
+            <Link
+              to="/signup"
+              className="font-medium text-secondary underline"
+            >
+              Create an Account
+            </Link>
+          </p>
+        </form>
+      </div>
+
+ <GithubIcon />
+
+    </div>
+
+    
+  </>
+);
 }
 
 export default Login;

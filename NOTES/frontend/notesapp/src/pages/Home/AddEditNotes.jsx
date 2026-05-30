@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TagInput from "../../components/Navbar/input/TagInput";
 import { MdClose } from "react-icons/md";
 import api from "../../api/axios.js";
+import toast from "react-hot-toast";
 
 const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
   const [title, setTitle] = useState("");
@@ -10,7 +11,7 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
   const [selectedLevel, setSelectedLevel] = useState("C");
   const [error, setError] = useState(null);
 
-  // ✅ RESET + PREFILL FORM
+  // RESET + PREFILL FORM
   useEffect(() => {
     if (type === "edit" && noteData) {
       setTitle(noteData.title || "");
@@ -27,9 +28,7 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
     }
   }, [type, noteData]);
 
-  // ======================
-  // ADD NOTE
-  // ======================
+ // ADD NOTE
   const addNewNote = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -49,6 +48,8 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
         }
       );
 
+      toast.success("New Note Created");
+
       // instant UI update
      // setNotes((prev) => [res.data.note, ...prev]);
        setNotes((prev) =>
@@ -61,9 +62,8 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
     }
   };
 
-  // ======================
-  // EDIT NOTE
-  // ======================
+
+  //EDIT NOTES
   const editNote = async () => {
     const id = noteData?._id;
 
@@ -90,6 +90,8 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
         }
       );
 
+      toast.success("Note Updated");
+
       if (!res.data) {
   console.log("Invalid response:", res.data);
   return;
@@ -108,9 +110,7 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
     }
   };
 
-  // ======================
-  // VALIDATION + ROUTER
-  // ======================
+  
   const handleSubmit = () => {
     if (!title) {
       setError("Please enter a title");
@@ -192,7 +192,7 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
 
       {/* SUBMIT */}
       <button
-        className="w-full bg-orange-400 text-white font-medium mt-5 p-3 rounded"
+        className="w-full bg-orange-400 text-white font-medium mt-5 p-3 rounded hover:bg-yellow-400"
         onClick={handleSubmit}
       >
         {type === "edit" ? "UPDATE NOTE" : "ADD NOTE"}

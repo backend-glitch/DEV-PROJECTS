@@ -5,6 +5,15 @@ import { MdAdd } from "react-icons/md";
 import AddEditNotes from "./AddEditNotes";
 import Modal from "react-modal";
 import api from "../../api/axios.js";
+import { FaGithub } from "react-icons/fa6";
+
+import lottieReact from "lottie-react";
+import nonoteanimation from "../../assets/nonote.json";
+import GithubIcon from "../../components/icons/GithubIcon.jsx";
+import toast from "react-hot-toast";
+
+const Lottie = lottieReact.default;
+
 
 Modal.setAppElement("#root");
 
@@ -34,6 +43,8 @@ const Home = () => {
       });
 
       setNotes(response.data);
+
+      toast.success("Welcome Back")
     } catch (error) {
       console.log("GET NOTES ERROR:", error);
     }
@@ -62,6 +73,8 @@ const Home = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      toast.success("Note Deleted Successfully")
     } catch (error) {
       setNotes(previous);
       console.log("DELETE FAILED:", error);
@@ -113,6 +126,8 @@ const Home = () => {
 
   return (
     <>
+   
+
       <Navbar
         handleSearch={handleSearch}
         onClearSearch={onClearSearch}
@@ -124,34 +139,53 @@ const Home = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-4 gap-4 mt-8">
 
-          {Array.isArray(filteredNotes) &&
-            filteredNotes
-              .filter((n) => n && n._id)
-              .map((note) => (
-                <NotesCard
-                  key={note._id}
-                  title={note.title}
-                  level={note.level}
-                  content={note.content}
-                  tags={note.tags}
-                  isPinned={note.isPinned}
-                  date={new Date(note.createdAt).toLocaleDateString()}
-                  onEdit={() =>
-                    setOpenAddEditNotes({
-                      isShown: true,
-                      type: "edit",
-                      data: note,
-                      level: note.level,
-                    })
-                  }
-                  onDelete={() => deleteNote(note._id)}
-                  onPinNote={() => {}}
-                />
-              ))}
+          {filteredNotes.length > 0 ? (
+  filteredNotes.map((note) => (
+    <NotesCard
+      key={note._id}
+      title={note.title}
+      level={note.level}
+      content={note.content}
+      tags={note.tags}
+      isPinned={note.isPinned}
+      date={new Date(note.createdAt).toLocaleDateString()}
+      onEdit={() => {  setOpenAddEditNotes({
+      isShown: true,
+      type: "edit",
+      data: note,
+      level: note.level,
+    })}}
+      onDelete={() => deleteNote(note._id)}
+      onPinNote={() => {}}
+    />
+  ))
+) : (
+<>
+  <GithubIcon />
+
+  <div className="col-span-4 flex flex-col items-center justify-center mt-10">
+    <Lottie
+      animationData={nonoteanimation}
+      loop
+      className="w-96"
+    />
+
+    <h2 className="text-2xl font-semibold text-slate-700">
+      No Notes Yet
+    </h2>
+
+    <p className="text-slate-500 mt-2">
+      Create your first note to get started.
+    </p>
+  </div>
+  </>
+)}
+
+
         </div>
       </div>
 
-      {/* ADD BUTTON */}
+    
       <button
         className="w-12 h-12 flex items-center justify-center rounded-2xl bg-secondary hover:bg-yellow-400 shadow-xl transition-all absolute right-10 bottom-10"
         onClick={() =>
@@ -166,7 +200,7 @@ const Home = () => {
         <MdAdd className="text-[32px] text-white" />
       </button>
 
-      {/* MODAL */}
+     
       <Modal
         isOpen={openAddEditNotes.isShown}
         onRequestClose={() =>

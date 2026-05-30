@@ -1,13 +1,22 @@
 import React from "react";
 import Home from "./pages/Home/Home";
-import { Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import ProtectedRoute from "./pages/protectedroutes/protectRoute";
 import PublicRoute from "./pages/protectedroutes/publicRoute";
+import NotFound from "./pages/notfound/notfound";
+import {Toaster, useToaster} from "react-hot-toast";
+
 
 const App = () => {
   return (
+    <Router>
     <Routes>
 
       {/* DEFAULT ROUTE */}
@@ -15,8 +24,7 @@ const App = () => {
         path="/"
         element={<Navigate to="/login" replace />}
       />
-
-      {/* LOGIN */}
+ 
       <Route
         path="/login"
         element={
@@ -26,7 +34,7 @@ const App = () => {
         }
       />
 
-      {/* SIGNUP */}
+      
       <Route
         path="/signup"
         element={
@@ -36,7 +44,7 @@ const App = () => {
         }
       />
 
-      {/* DASHBOARD */}
+    
       <Route
         path="/dashboard"
         element={
@@ -46,7 +54,23 @@ const App = () => {
         }
       />
 
+         <Route
+         path="*"
+         element={
+          <NotFound />
+         }
+       />
+
+       
+
     </Routes>
+
+
+       <Toaster position="top-center" />
+
+    </Router>
+
+    
   );
 };
 

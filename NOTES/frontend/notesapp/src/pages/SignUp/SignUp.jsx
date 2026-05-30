@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import PasswordInput from "../../components/Navbar/input/PasswordInput";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
 import api from "../../api/axios.js";
+import toast from "react-hot-toast";
+
+
+import lottieReact from "lottie-react";
+import loginAnimation from "../../assets/signup.json";
+import GithubIcon from "../../components/icons/GithubIcon.jsx";
+
+
+
+const Lottie = lottieReact.default;
 
 const SignUp = () => {
   const [fullName, setFullName] = useState("");
@@ -43,6 +53,10 @@ const SignUp = () => {
 
       // redirect to login
       navigate("/login");
+      toast.success("Account Created");
+
+      <GithubIcon />
+
 
     } catch (error) {
       console.log(error);
@@ -56,6 +70,9 @@ const SignUp = () => {
     <>
       <Navbar />
 
+ <div className="min-h-[80vh] flex flex-col lg:flex-row items-center justify-center gap-12 px-6">
+
+ 
       <div className="flex items-center justify-center mt-28">
         <div className="w-96 border rounded bg-white px-7 py-10">
 
@@ -105,6 +122,16 @@ const SignUp = () => {
           </form>
 
         </div>
+      </div>
+
+        <div className="w-full max-w-md">
+          <Lottie
+            animationData={loginAnimation}
+            loop={true}
+          />
+        </div>
+
+
       </div>
     </>
   );

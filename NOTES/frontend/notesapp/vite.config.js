@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/notes": {
-        target: "https://turbo-succotash-pj6vq9wpj9gjc9r65-8000.app.github.dev",
+        target: "http://localhost:8000",
         changeOrigin: true,
         secure: false,
       },

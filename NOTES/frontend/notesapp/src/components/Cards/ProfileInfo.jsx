@@ -16,7 +16,7 @@ const ProfileInfo = ({ onLogout }) => {
         <p className="text-sm font-medium">{fullName}</p>
 
         <button
-          className="text-sm text-slate-700 underline"
+          className="text-sm text-slate-700 underline hover:text-orange-400"
           onClick={onLogout}
         >
           Logout
