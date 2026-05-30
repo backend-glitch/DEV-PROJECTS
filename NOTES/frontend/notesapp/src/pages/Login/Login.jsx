@@ -1,41 +1,65 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/Navbar/input/PasswordInput";
 import { validateEmail } from "../../utils/helper";
+import { FaAppStoreIos } from "react-icons/fa6";
+import api from "../../api/axios.js";
+
 
 const Login = () => {
+
+    // hooks are always written inside componenet
+    const navigate = useNavigate();
 
     const [email, setemail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
 
+const handleLogin = async (e) => {
 
-    const handleLogin = async(e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-          if(!validateEmail(email)){
-                setError("Enter a valide email");
-                return;
-            }
-        
-            if(!password){
-                setError("enter a password");
-                return;
-            }
-            
+    if (!validateEmail(email)) {
+        setError("Enter a valid email");
+        return;
     }
 
-    // if(!validateEmail) {
-    //     setError("Please enter a valide email");
-    //     return;
-    // }
+    if (!password) {
+        setError("Enter a password");
+        return;
+    }
 
-//     if(!password){
-//     setError("please enter a password");
-// };
+    setError("");
 
-//setError("");
+    try {
+
+        const response = await api.post("/auth/login", {
+            email,
+            password,
+        });
+
+        localStorage.setItem(
+            "token",
+            response.data.token
+        );
+
+        navigate("/dashboard"); 
+
+        console.log(response.data);
+
+    } catch (error) {
+
+         console.log(error);
+    console.log(error.response);
+
+        setError(
+            error.response?.data?.message ||
+            "Login failed"
+        );
+
+    }
+};
 
     return (
         <>

@@ -1,8 +1,10 @@
 import React from "react";
 import {MdOutlinePushPin} from "react-icons/md"
 import { MdCreate, MdDelete } from "react-icons/md";
+//import Note from "../../../../../backend/models/note.models";
 
 const  NotesCard = ({title,level, date,content, tags, isPinned, onEdit, onDelete, onPinNote}) => {
+
 
     return(
         <div className =" mt-5 border rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out">
@@ -27,21 +29,24 @@ const  NotesCard = ({title,level, date,content, tags, isPinned, onEdit, onDelete
                 </div>
 
                <div className="ml-40 mb-8">
-              <MdOutlinePushPin className={`icon-btn ${isPinned ? 'text-secondary' : 'text-slate-500' }` } />
+              <MdOutlinePushPin className={`icon-btn ${isPinned ? 'text-secondary' : 'text-slate-500' }` } onClick={onPinNote}/>
               </div>
 
             </div>
 
-            <p className="text-xs text-slate-400 mt-2">{content?.slice(0,60)}</p>
+  <div className="flex items-center justify-between mt-2">
+            <div className="test-xs text-slate-500">#{tags}</div>
 
-            <div className="flex items-center justify-between mt-2">
-            <div className="test-xs text-slate-500">{tags}</div>
+           
+        </div>
 
-            <div className="flex items-center gap-2">
+            <p className="text-xl text-slate-800 mt-2">{content?.slice(0,60)}</p>
+
+           <div className="flex items-center gap-2">
                 <MdCreate className="icon-btn hover:text-green-600" onClick={onEdit} />
                 <MdDelete className="icon-btn hover:text-red-500" onClick={onDelete} />
             </div>
-        </div>
+
         </div>
     )
 }
