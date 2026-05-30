@@ -40,3 +40,7 @@
   @apply text-xs text-slate-900;
 }
 
+.notes-content {
+ font-family: 'Inter', sans-serif;
+}
+
