@@ -1,25 +1,29 @@
 import React from "react";
 import { getInitials } from "../../utils/helper";
-import SearchBar from "../SearchBar/SearchBar";
 
-const ProfileInfo= ({onLogout}) => {
+const ProfileInfo = ({ onLogout }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
 
-    return(
-        <div className="flex items-center gap-3">
-            <div  className="w-12 h-12 flex items-center justify-center rounded-full text-slate-950 font-medium bg-slate-100 ">{getInitials("ARJUN VERMA")}</div>
-        <div>
+  const fullName = user?.fullName || "User";
 
-           
+  return (
+    <div className="flex items-center gap-3">
+      <div className="w-12 h-12 flex items-center justify-center rounded-full text-slate-950 font-medium bg-slate-100">
+        {getInitials(fullName)}
+      </div>
 
-<p className = "test-sm font-medium">ARJUN</p>
-<button className = "text-sm text-slate-700 underline" onClick={onLogout}>
-    Logout
-</button>
+      <div>
+        <p className="text-sm font-medium">{fullName}</p>
 
-</div>
-
-</div>     
-    )
-}
+        <button
+          className="text-sm text-slate-700 underline"
+          onClick={onLogout}
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default ProfileInfo;

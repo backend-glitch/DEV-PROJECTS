@@ -34,19 +34,22 @@ const handleLogin = async (e) => {
 
     try {
 
-        const response = await api.post("/auth/login", {
+        const res = await api.post("/auth/login", {
             email,
             password,
         });
 
         localStorage.setItem(
             "token",
-            response.data.token
+            res.data.token
         );
+
+        localStorage.setItem("token", res.data.token);
+     localStorage.setItem("user", JSON.stringify(res.data.user));
 
         navigate("/dashboard"); 
 
-        console.log(response.data);
+        console.log(res.data);
 
     } catch (error) {
 
