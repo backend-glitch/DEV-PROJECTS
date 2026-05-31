@@ -26,7 +26,7 @@ const PORT  = 8000 || process.env.PORT;
 connectDB();
 
 const app = express();
-const PORT = 8000;
+//const PORT = 8000;
 
 
 app.use(cors());
