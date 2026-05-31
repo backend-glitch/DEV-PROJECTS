@@ -20,6 +20,8 @@ import {
 } from "./middleware/limit.middleware.js";
 
 
+const PORT  = 8000 || process.env.PORT;
+
 //db
 connectDB();
 

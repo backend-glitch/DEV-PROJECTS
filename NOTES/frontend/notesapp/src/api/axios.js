@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/notes",
+  baseURL:  import.meta.env.VITE_API_URL,
 });
 
 api.interceptors.response.use(
@@ -11,7 +11,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.clear();
 
-      window.location.href = "/login";
+      window.location.href = "/";
     }
 
     return Promise.reject(error);
