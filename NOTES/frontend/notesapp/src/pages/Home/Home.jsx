@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import NotesCard from "../../components/Cards/NotesCard";
-import { MdAdd } from "react-icons/md";
+import { MdAdd , MdClose } from "react-icons/md";
 import AddEditNotes from "./AddEditNotes";
 import Modal from "react-modal";
 import api from "../../api/axios.js";
@@ -11,6 +11,7 @@ import lottieReact from "lottie-react";
 import nonoteanimation from "../../assets/nonote.json";
 import GithubIcon from "../../components/icons/GithubIcon.jsx";
 import toast from "react-hot-toast";
+
 
 const Lottie = lottieReact.default;
 
@@ -25,26 +26,21 @@ const Home = () => {
     level: null,
   });
 
+
   const [notes, setNotes] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("ALL");
   const [filteredNotes, setFilteredNotes] = useState([]);
 
-  // to preview
-  const [viewNote, setViewNote] = useState({
-    isOpen : false,
-    data : null,
-  });
+  const [selectedNote, setSelectedNote] = useState(null);
+const [viewOpen, setViewOpen] = useState(false);
 
-  const handelView = (note) => {
+const handleViewNote = (note) => {
+  setSelectedNote(note);
+  setViewOpen(true);
+};
 
-    setViewNote({
-      isOpen : true,
-      data : note,
-    })
-  }
- 
   const getNotes = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -172,8 +168,9 @@ const Home = () => {
     })}}
       onDelete={() => deleteNote(note._id)}
       onPinNote={() => {}}
+      onView={() => {handleViewNote(note)}}
 
-      onClick={() => handelView(note)}
+      // onClick={() => handleViewNote(note)}
     />
   ))
 ) : (
@@ -252,8 +249,8 @@ const Home = () => {
     
       </Modal>
 
-         {/* VIEW MODAL */}
-    <Modal
+      
+    {/* <Modal
       isOpen={viewNote.isOpen}
       onRequestClose={() =>
         setViewNote({ isOpen: false, data: null })
@@ -277,6 +274,61 @@ const Home = () => {
         </>
       )}
     </Modal>
+     */}
+    
+    {/* // view note */}
+<Modal
+  isOpen={viewOpen}
+  onRequestClose={() => setViewOpen(false)}
+  contentLabel="View Note"
+  style={{
+    overlay: {
+      backgroundColor: "rgba(0,0,0,0.8)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    content: {
+      width: "600px",
+      maxHeight: "80vh",
+      margin: "auto",
+      borderRadius: "12px",
+      padding: "20px",
+      overflow: "scroll",
+    },
+  }}
+>
+
+  <h2 style={{ borderBottom: "2px solid black", paddingBottom: "8px" }}>
+    {selectedNote?.title}
+  </h2>
+
+
+  <div style={{ marginTop: "15px", whiteSpace: "pre-wrap" }}>
+    {selectedNote?.content}
+  </div>
+
+ 
+  <button
+    style={{
+     position:"absolute",
+     top:"3px",
+     right:"3px",
+      padding: "8px 12px",
+      background: "orange",
+      color: "white",
+      border: "none",
+      borderRadius: "6px",
+      cursor: "pointer",
+    }}
+    onClick={() => setViewOpen(false)}
+  >
+    <MdClose className="text-xl" />
+    
+  </button>
+
+
+</Modal>
 
 
     </>

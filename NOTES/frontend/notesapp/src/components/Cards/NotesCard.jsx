@@ -1,5 +1,6 @@
 import React from "react";
 import { MdOutlinePushPin, MdCreate, MdDelete } from "react-icons/md";
+import { FaEye } from "react-icons/fa6";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -15,7 +16,7 @@ const NotesCard = ({
   onEdit,
   onDelete,
   onPinNote,
-  onClick,
+  onView,
 }) => {
 
   
@@ -23,7 +24,7 @@ const NotesCard = ({
 
 
   return (
-    <div className="mt-5 border rounded p-4 bg-white hover:shadow-xl transition-all cursor-pointer " onClick={onClick}>
+    <div className="mt-5 border rounded p-4 bg-white hover:shadow-xl transition-all cursor-pointer ">
 
     
       <div className="flex justify-between  items-start">
@@ -83,6 +84,12 @@ const NotesCard = ({
           className="text-lg cursor-pointer hover:text-red-500"
           onClick={onDelete}
         />
+
+        <FaEye
+        className="text-lg cursor-pointer hover:text-blue-500"
+        onClick={onView}
+        />
+
       </div>
       
     </div>

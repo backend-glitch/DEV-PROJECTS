@@ -33,7 +33,7 @@ const NotFound = () => {
    
 
       <Link
-        to="/dashboard"
+        to="/"
         className="mt-6 px-6 py-3 bg-yellow-400 hover:bg-yellow-500 rounded-lg font-medium transition-all"
       >
         Back to Dashboard

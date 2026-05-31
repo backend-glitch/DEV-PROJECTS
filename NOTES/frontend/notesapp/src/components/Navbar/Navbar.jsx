@@ -1,6 +1,6 @@
 import React from "react";
 import ProfileInfo from "../Cards/ProfileInfo";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import { useLocation } from "react-router-dom";
@@ -21,16 +21,25 @@ const Navbar = ({handleSearch, onClearSearch,searchQuery,selectedLevel,handleLev
     const onLogout = () => {
 
         localStorage.clear();
-        window.location.href = "/login";
+        window.location.href = "/";
     //  localStorage.removeItem("token");
-      navigate("/login");
+    //  navigate("/");
+    <Link to="/" />
     };
 
    
     return (
        // <div>Navbar</div>
        <div className="bg-yellow-200 flex items-center justify-between px-6 py-2 drop-shadow">
-      <p className="notes-content text-xl text-slate-800 mt-2">
+
+          <div style={{
+              width: 32, height: 32, borderRadius: 8,
+              background: "#B85C10",
+              display: "flex", alignItems: "center", justifyContent: "center",padding : "10px",
+              fontSize: 16, color: "#fff", fontWeight: 700,
+            }}>N</div>
+
+      <p className="ml-5 notes-content text-xl text-slate-800 mt-2">
      NOTES
 </p>
       <div className="w-full h-[2px]"></div>

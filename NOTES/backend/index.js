@@ -12,6 +12,14 @@ import noteRouter from "./routes/note.routes.js"
 import aiRouter from "./routes/ai.routes.js";
 
 
+import {
+  authLimiter,
+  notesLimiter,
+  aiLimiter,
+  globalLimiter,
+} from "./middleware/limit.middleware.js";
+
+
 //db
 connectDB();
 
@@ -23,15 +31,16 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use(globalLimiter);
 
 
 app.get("/", (req, res) => {
     res.send("API Working");
 });
 
-app.use("/notes/auth",authRouter);
-app.use("/notes",noteRouter);
-app.use("/notes/ai",aiRouter);
+app.use("/notes/auth",authLimiter,authRouter);
+app.use("/notes",notesLimiter,noteRouter);
+app.use("/notes/ai",aiLimiter,aiRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
