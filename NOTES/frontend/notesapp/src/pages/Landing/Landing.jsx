@@ -213,10 +213,7 @@ export default function NotesLanding() {
     
       <section style={{ ...sectionStyle, flexDirection: "column", textAlign: "center", gap: "2.5rem" }}>
 
-        {/* decorative blobs */}
-        <div style={{ position: "absolute", top: "10%", left: "5%", width: 200, height: 200, borderRadius: "50%", background: T.yellowLight, opacity: 0.4, filter: "blur(60px)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: "15%", right: "5%", width: 160, height: 160, borderRadius: "50%", background: "#FDDCB0", opacity: 0.5, filter: "blur(50px)", pointerEvents: "none" }} />
-
+     
         <div style={{
           transform: heroVisible ? "translateY(0)" : "translateY(20px)",
           opacity: heroVisible ? 1 : 0,
@@ -224,7 +221,13 @@ export default function NotesLanding() {
           position: "relative", zIndex: 1,
         }}>
          
-          <h1 style={{ fontSize: "clamp(2.8rem,7vw,5rem)", fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 600, lineHeight: 1.08, marginBottom: "1.2rem", letterSpacing: "-0.02em", color: T.text }}>
+          <h1 style={{ fontSize: "clamp(2.8rem,7vw,10rem)", fontFamily: "'Brush Script MT', cursive", fontWeight: 600, lineHeight: 1.08, marginBottom: "2rem", letterSpacing: "-0.02em", color: T.accentDark }}>
+            NOTELOVER<br />
+           
+                 </h1>
+
+
+          <h1 style={{ fontSize: "clamp(2.8rem,7vw,3rem)", fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 600, lineHeight: 1.08, marginBottom: "1.2rem", letterSpacing: "-0.02em", color: T.text }}>
             Notes that think<br />
             <span style={{ color: T.accent }}>with you</span>
           </h1>

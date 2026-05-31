@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import lottieReact from "lottie-react";
 import loginAnimation from "../../assets/signup.json";
 import GithubIcon from "../../components/icons/GithubIcon.jsx";
+import FullScreenLoader from "../../components/Loader/FullScreenLoader.jsx";
 
 
 
@@ -20,6 +21,8 @@ const SignUp = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  const [loading,setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -37,6 +40,9 @@ const SignUp = () => {
       return setError("Enter a password");
 
     try {
+
+      setLoading(true);
+
       const res = await api.post("/auth/signUp", {
         fullName,
         email,
@@ -63,6 +69,8 @@ const SignUp = () => {
       setError(
         error.response?.data?.message || "Signup failed"
       );
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -106,8 +114,8 @@ const SignUp = () => {
               </p>
             )}
 
-            <button type="submit" className="btn-primary">
-              Create Account
+            <button type="submit" className="btn-primary" disabled={loading}>
+              {loading ? <FullScreenLoader /> : "Create Account"}
             </button>
 
             <p className="text-sm text-center mt-4">

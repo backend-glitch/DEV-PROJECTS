@@ -5,6 +5,7 @@ import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import { useLocation } from "react-router-dom";
 import { FaGithub } from "react-icons/fa6";
+import FullScreenLoader from "../Loader/FullScreenLoader";
 
 const Navbar = ({handleSearch, onClearSearch,searchQuery,selectedLevel,handleLevelFilter}) => {
 
@@ -15,16 +16,28 @@ const Navbar = ({handleSearch, onClearSearch,searchQuery,selectedLevel,handleLev
   
   // const[filteredNotes, setFilteredNotes] = useState("");
  // const [searchQuery, setSearchQuery] = useState("");
+
+ const [loading, setLoading] = useState(false);
+
   
     const navigate = useNavigate;
 
-    const onLogout = () => {
+    const onLogout = async() => {
 
-        localStorage.clear();
-        window.location.href = "/";
-    //  localStorage.removeItem("token");
-    //  navigate("/");
-    <Link to="/" />
+try {
+  setLoading(true);
+
+  await new Promise((resolve) =>
+    setTimeout(resolve, 1000)
+  );
+
+  localStorage.clear();
+  window.location.href = "/";
+} catch (error) {
+  console.log(error);
+} finally {
+  setLoading(false);
+}
     };
 
    
@@ -40,7 +53,7 @@ const Navbar = ({handleSearch, onClearSearch,searchQuery,selectedLevel,handleLev
             }}>N</div>
 
       <p className="ml-5 notes-content text-xl text-slate-800 mt-2">
-     NOTES
+     NOTESLOVER
 </p>
       <div className="w-full h-[2px]"></div>
 
@@ -64,7 +77,7 @@ const Navbar = ({handleSearch, onClearSearch,searchQuery,selectedLevel,handleLev
      onClearSearch={onClearSearch}
      />
 
-     <ProfileInfo onLogout={onLogout} />
+     <ProfileInfo onLogout={onLogout} loading={loading} />
 
      
 

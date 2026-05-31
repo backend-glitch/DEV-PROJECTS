@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { FaGithub } from "react-icons/fa6";
 
 import GithubIcon from "../../components/icons/GithubIcon.jsx";
+import FullScreenLoader from "../../components/Loader/FullScreenLoader.jsx";
 
 //console.log(Lottie)
 //console.log(loginAnimation);
@@ -27,6 +28,8 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
 
+    const [loading,setLoading] = useState(false);
+
 const handleLogin = async (e) => {
 
     e.preventDefault();
@@ -41,9 +44,13 @@ const handleLogin = async (e) => {
         return;
     }
 
+
+
     setError("");
 
     try {
+
+      setLoading(true);
 
         const res = await api.post("/auth/login", {
             email,
@@ -60,6 +67,7 @@ const handleLogin = async (e) => {
 
         navigate("/dashboard"); 
         toast.success("Login Successfull");
+ 
 
 
         console.log(res.data);
@@ -74,6 +82,8 @@ const handleLogin = async (e) => {
             "Login failed"
         );
 
+    }finally{
+      setLoading(false);
     }
 };
 
@@ -115,9 +125,10 @@ const handleLogin = async (e) => {
             </p>
           )}
 
-          <button type="submit" className="btn-primary">
-            LOGIN
+          <button type="submit" className="btn-primary" disabled={loading}>
+             {loading ? <FullScreenLoader /> : "LOGIN"}
           </button>
+  
 
           <p className="text-sm text-center mt-4">
             Not registered yet?{" "}

@@ -12,7 +12,6 @@ import nonoteanimation from "../../assets/nonote.json";
 import GithubIcon from "../../components/icons/GithubIcon.jsx";
 import toast from "react-hot-toast";
 
-
 const Lottie = lottieReact.default;
 
 
@@ -36,6 +35,8 @@ const Home = () => {
   const [selectedNote, setSelectedNote] = useState(null);
 const [viewOpen, setViewOpen] = useState(false);
 
+const [loading,setLoading] = useState(false);
+
 const handleViewNote = (note) => {
   setSelectedNote(note);
   setViewOpen(true);
@@ -43,6 +44,7 @@ const handleViewNote = (note) => {
 
   const getNotes = async () => {
     try {
+
       const token = localStorage.getItem("token");
 
       const response = await api.get("/getmynote", {
@@ -75,6 +77,9 @@ const handleViewNote = (note) => {
     setNotes((prev) => prev.filter((note) => note._id !== id));
 
     try {
+
+      setLoading(true);
+
       const token = localStorage.getItem("token");
 
       await api.delete(`/${id}`, {
@@ -87,6 +92,8 @@ const handleViewNote = (note) => {
     } catch (error) {
       setNotes(previous);
       console.log("DELETE FAILED:", error);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -169,6 +176,7 @@ const handleViewNote = (note) => {
       onDelete={() => deleteNote(note._id)}
       onPinNote={() => {}}
       onView={() => {handleViewNote(note)}}
+      loading={loading}
 
       // onClick={() => handleViewNote(note)}
     />

@@ -1,7 +1,8 @@
 import React from "react";
 import { getInitials } from "../../utils/helper";
+import FullScreenLoader from "../Loader/FullScreenLoader2";
 
-const ProfileInfo = ({ onLogout }) => {
+const ProfileInfo = ({ onLogout ,loading}) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const fullName = user?.fullName || "User";
@@ -17,9 +18,9 @@ const ProfileInfo = ({ onLogout }) => {
 
         <button
           className="text-sm text-slate-700 underline hover:text-orange-400"
-          onClick={onLogout}
+          onClick={onLogout} disabled ={loading}
         >
-          Logout
+            {loading ? <FullScreenLoader /> : "LOGOUT"}
         </button>
       </div>
     </div>

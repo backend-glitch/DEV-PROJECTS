@@ -3,6 +3,8 @@ import { MdOutlinePushPin, MdCreate, MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa6";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import Loader from "../Loader/Loader";
+import FullScreenLoader2 from "../Loader/FullScreenLoader2";
 
 
 
@@ -17,6 +19,7 @@ const NotesCard = ({
   onDelete,
   onPinNote,
   onView,
+  loading,
 }) => {
 
   
@@ -75,15 +78,29 @@ const NotesCard = ({
       </div>
 
       {/* ACTIONS */}
+    
       <div className="flex items-center gap-3 mt-3">
+      
+       {loading ? (
+      <Loader />
+     ) : (
+
         <MdCreate
           className="text-lg cursor-pointer hover:text-green-600"
           onClick={onEdit}
         />
-        <MdDelete
-          className="text-lg cursor-pointer hover:text-red-500"
-          onClick={onDelete}
-        />
+        )}
+     
+       {loading ? (
+  <FullScreenLoader2 />
+) : (
+  <MdDelete
+    className="text-lg cursor-pointer hover:text-red-500"
+    onClick={onDelete}
+  />
+)}
+
+       
 
         <FaEye
         className="text-lg cursor-pointer hover:text-blue-500"
