@@ -13,9 +13,9 @@ export const notesLimiter = limiter({
 });
 
 export const aiLimiter = limiter({
-  windowMs: 12 * 60 * 60 * 1000, 
-  max: 5, 
-  message: "AI limit reached, wait a moment.",
+  windowMs:  60 * 60 * 1000, 
+  max: 10, 
+  message: "AI limit reached, try after an hour",
 });
 
 export const globalLimiter = limiter({
