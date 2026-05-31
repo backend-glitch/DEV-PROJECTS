@@ -52,9 +52,13 @@ try {
               fontSize: 16, color: "#fff", fontWeight: 700,
             }}>N</div>
 
-      <p className="ml-5 notes-content text-xl text-slate-800 mt-2">
-     NOTESLOVER
+    <p
+  className="ml-5 notes-content text-xl text-slate-800 mt-2"
+  style={{ fontFamily: "'Brush Script MT', cursive" }}
+>
+  NOTELOVER
 </p>
+
       <div className="w-full h-[2px]"></div>
 
    { !hideUI && (
