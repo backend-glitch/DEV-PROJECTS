@@ -31,6 +31,19 @@ const Home = () => {
   const [selectedLevel, setSelectedLevel] = useState("ALL");
   const [filteredNotes, setFilteredNotes] = useState([]);
 
+  // to preview
+  const [viewNote, setViewNote] = useState({
+    isOpen : false,
+    data : null,
+  });
+
+  const handelView = (note) => {
+
+    setViewNote({
+      isOpen : true,
+      data : note,
+    })
+  }
  
   const getNotes = async () => {
     try {
@@ -134,10 +147,12 @@ const Home = () => {
         searchQuery={searchQuery}
         selectedLevel={selectedLevel}
         handleLevelFilter={handleLevelFilter}
+
+      
       />
 
       <div className="container mx-auto">
-        <div className="grid grid-cols-4 gap-4 mt-8">
+        <div className="grid grid-cols-4 gap-10 mt-8 mr-100">
 
           {filteredNotes.length > 0 ? (
   filteredNotes.map((note) => (
@@ -157,6 +172,8 @@ const Home = () => {
     })}}
       onDelete={() => deleteNote(note._id)}
       onPinNote={() => {}}
+
+      onClick={() => handelView(note)}
     />
   ))
 ) : (
@@ -187,7 +204,7 @@ const Home = () => {
 
     
       <button
-        className="w-12 h-12 flex items-center justify-center rounded-2xl bg-secondary hover:bg-yellow-400 shadow-xl transition-all absolute right-10 bottom-10"
+        className="w-12 h-12 flex items-center justify-center rounded-2xl bg-secondary hover:bg-yellow-400 shadow-xl transition-all fixed right-10 bottom-10"
         onClick={() =>
           setOpenAddEditNotes({
             isShown: true,
@@ -213,7 +230,7 @@ const Home = () => {
         }
         style={{
           overlay: {
-            backgroundColor: "rgba(0,0,0,0.2)",
+            backgroundColor: "rgba(0,0,0,0.8)",
           },
         }}
         className="w-[500px] max-h-1/2 bg-white rounded-md mx-auto mt-14 p-5 overflow-hidden"
@@ -232,7 +249,36 @@ const Home = () => {
             })
           }
         />
+    
       </Modal>
+
+         {/* VIEW MODAL */}
+    <Modal
+      isOpen={viewNote.isOpen}
+      onRequestClose={() =>
+        setViewNote({ isOpen: false, data: null })
+      }
+       style={{
+    overlay: {
+      backgroundColor: "rgba(0,0,0,0.8)", 
+    },
+  }}
+      className="w-[900px] max-h-[80vh]  overflow-y-auto  bg-orange-200 mx-auto mt-10 p-6 rounded overflow-scroll"
+    >
+      {viewNote.data && (
+        <>
+          <h2 className="text-2xl font-bold mb-4">
+            {viewNote.data.title}
+          </h2>
+
+          <div className="text-slate-700">
+            {viewNote.data.content}
+          </div>
+        </>
+      )}
+    </Modal>
+
+
     </>
   );
 };

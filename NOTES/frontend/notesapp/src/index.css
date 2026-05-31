@@ -19,6 +19,11 @@
 
 
   }
+
+  ::selection {
+  background: #f97316;
+  color: white;
+}
 }
 
 @layer components {

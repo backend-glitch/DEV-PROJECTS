@@ -1,5 +1,9 @@
 import React from "react";
 import { MdOutlinePushPin, MdCreate, MdDelete } from "react-icons/md";
+import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+
+
 
 const NotesCard = ({
   title,
@@ -11,12 +15,18 @@ const NotesCard = ({
   onEdit,
   onDelete,
   onPinNote,
+  onClick,
 }) => {
+
+  
+//const [content, setContent] = useState("");
+
+
   return (
-    <div className="mt-5 border rounded p-4 bg-white hover:shadow-xl transition-all">
+    <div className="mt-5 border rounded p-4 bg-white hover:shadow-xl transition-all cursor-pointer " onClick={onClick}>
 
     
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between  items-start">
 
       
         <div>
@@ -55,9 +65,13 @@ const NotesCard = ({
       </div>
 
       {/* CONTENT */}
-      <p className="text-sm text-slate-800 mt-2">
+      {/* <p className="text-sm text-slate-800 mt-2">
         {content?.slice(0, 60)}
-      </p>
+        
+      </p> */}
+      <div className="text-sm text-slate-800 mt-2 line-clamp-4">
+      <ReactMarkdown>{content}</ReactMarkdown>
+      </div>
 
       {/* ACTIONS */}
       <div className="flex items-center gap-3 mt-3">
@@ -70,6 +84,7 @@ const NotesCard = ({
           onClick={onDelete}
         />
       </div>
+      
     </div>
   );
 };

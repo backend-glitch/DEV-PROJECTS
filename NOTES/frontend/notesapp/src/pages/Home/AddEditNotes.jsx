@@ -11,6 +11,56 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
   const [selectedLevel, setSelectedLevel] = useState("C");
   const [error, setError] = useState(null);
 
+  //AI integration 
+  const [loading, setLoading] = useState(false);
+
+  //const toastId = toast.loading("Generating AI Note ...");
+
+  const generateContent = async() => {
+
+     if (!title.trim()) {
+    toast.error("Title is required to Generate Note");
+    setError("Title is required");
+    return;
+  }
+
+  const toastId = toast.loading("Generating AI Note ...");
+
+    try{
+
+      setLoading(true);
+
+      const response = await api.post("/ai/generate",{
+        title,
+        tags,
+        selectedLevel,
+      });
+
+      
+
+      setContent(response.data.content);
+
+      toast.success("Note Generated",{
+        id: toastId
+      });
+    }catch(err){
+      toast.error("Note Failed",{
+        id:toastId
+      });
+
+       console.log("AI ERROR:", err);
+  console.log("RESPONSE:", err.response?.data);
+
+  toast.error(
+    err.response?.data?.error || 
+    err.response?.data?.message || 
+    err.message
+  );
+    }finally{
+      setLoading(false);
+    }
+  }
+
   // RESET + PREFILL FORM
   useEffect(() => {
     if (type === "edit" && noteData) {
@@ -184,6 +234,20 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
         <label className="input-label">TAGS</label>
         <TagInput tags={tags} setTags={setTags} />
       </div>
+
+        <button
+  type="button"
+  onClick={generateContent}
+  className={`text-white bg-orange-600 px-3 py-1 rounded mt-2 hover:scale-1.1   ${loading 
+    ? "bg-gradient-to-r from-orange-500 to-yellow-500 animate-pulse" 
+    : "bg-orange-600 hover:bg-orange-700"
+  }`}
+  disabled={loading}
+>
+  {loading ? "Generating..." : " 🤖 Generate with AI"}
+  
+</button>
+
 
       {/* ERROR */}
       {error && (

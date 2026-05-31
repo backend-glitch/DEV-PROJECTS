@@ -1,6 +1,7 @@
-import express from "express";
+
 import cors from "cors";
 import dotenv from "dotenv";
+import express from "express";
 
 import connectDB from "./config/db.js";
 dotenv.config();
@@ -8,6 +9,7 @@ dotenv.config();
 
 import authRouter from "./routes/auth.routes.js";
 import noteRouter from "./routes/note.routes.js"
+import aiRouter from "./routes/ai.routes.js";
 
 
 //db
@@ -29,7 +31,7 @@ app.get("/", (req, res) => {
 
 app.use("/notes/auth",authRouter);
 app.use("/notes",noteRouter);
-
+app.use("/notes/ai",aiRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
