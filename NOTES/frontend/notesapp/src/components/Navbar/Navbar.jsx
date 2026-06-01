@@ -75,11 +75,17 @@ try {
   <option value="C">C</option>
 </select>
 
-     <SearchBar value={searchQuery} onChange={({target}) => {handleSearch(target.value);
-     }}
-    // handleSearch={handleSearch}
-     onClearSearch={onClearSearch}
-     />
+ 
+<div className="w-full flex justify-center ml-20">
+  <div className="w-full max-w-md">
+    <SearchBar
+      value={searchQuery}
+      onChange={({ target }) => handleSearch(target.value)}
+      onClearSearch={onClearSearch}
+    />
+  </div>
+</div>
+
 
      <ProfileInfo onLogout={onLogout} loading={loading} />
 
