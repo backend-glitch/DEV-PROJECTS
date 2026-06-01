@@ -3,6 +3,7 @@ import TagInput from "../../components/Navbar/input/TagInput";
 import { MdClose } from "react-icons/md";
 import api from "../../api/axios.js";
 import toast from "react-hot-toast";
+import FullScreenLoader2 from "../../components/Loader/FullScreenLoader2.jsx";
 
 const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
   const [title, setTitle] = useState("");
@@ -81,6 +82,9 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
  // ADD NOTE
   const addNewNote = async () => {
     try {
+
+     // setLoading(true);
+
       const token = localStorage.getItem("token");
 
       const res = await api.post(
@@ -109,6 +113,8 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
       onClose();
     } catch (error) {
       console.log("ADD ERROR:", error.response?.data || error.message);
+    }finally{
+    //  setLoading(false);
     }
   };
 
@@ -123,6 +129,9 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
     }
 
     try {
+
+    //  setLoading(true);
+
       const token = localStorage.getItem("token");
 
       const res = await api.put(
@@ -157,6 +166,8 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
     } catch (error) {
       //  console.log("NOTES:", note);
       console.log("EDIT ERROR:", error.response?.data || error.message);
+    }finally{
+     // setLoading(false);
     }
   };
 
@@ -184,7 +195,7 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
   return (
     <div className="relative">
 
-      {/* CLOSE BUTTON */}
+    
       <button
         className="w-10 h-10 absolute top-3 right-3"
         onClick={onClose}
@@ -192,7 +203,7 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
         <MdClose className="text-xl text-slate-500" />
       </button>
 
-      {/* TITLE */}
+      
       <div className="flex flex-col gap-2">
         <label className="input-label">TITLE</label>
         <input
@@ -203,7 +214,7 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
         />
       </div>
 
-      {/* CONTENT */}
+      
       <div className="flex flex-col gap-2 mt-4">
         <label className="input-label">CONTENT</label>
         <textarea
@@ -215,7 +226,6 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
         />
       </div>
 
-      {/* LEVEL */}
       <div className="mt-3">
         <label className="input-label">LEVEL</label>
         <select
@@ -229,7 +239,7 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
         </select>
       </div>
 
-      {/* TAGS */}
+     
       <div className="mt-3">
         <label className="input-label">TAGS</label>
         <TagInput tags={tags} setTags={setTags} />
@@ -249,17 +259,21 @@ const AddEditNotes = ({ noteData, type, setNotes, onClose }) => {
 </button>
 
 
-      {/* ERROR */}
+      
       {error && (
         <p className="text-red-500 text-xs mt-2">{error}</p>
       )}
 
-      {/* SUBMIT */}
+     
       <button
         className="w-full bg-orange-400 text-white font-medium mt-5 p-3 rounded hover:bg-yellow-400"
         onClick={handleSubmit}
+       
       >
         {type === "edit" ? "UPDATE NOTE" : "ADD NOTE"}
+
+      {/* if(loading) <FullScreenLoader2 />  */}
+
       </button>
     </div>
   );

@@ -156,7 +156,7 @@ const handleViewNote = (note) => {
   return (
     <>
    
-
+<div className="min-h-screen w-full overflow-x-hidden bg-wheat ">
       <Navbar
         handleSearch={handleSearch}
         onClearSearch={onClearSearch}
@@ -167,8 +167,8 @@ const handleViewNote = (note) => {
       
       />
 
-      <div className="container mx-auto">
-        <div className="grid grid-cols-4 gap-10 mt-8 mr-100">
+      <div className="container mx-auto  p-3 sm:p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
           {filteredNotes.length > 0 ? (
   filteredNotes.map((note) => (
@@ -220,6 +220,7 @@ const handleViewNote = (note) => {
         </div>
       </div>
 
+</div>
     
       <button
         className="w-12 h-12 flex items-center justify-center rounded-2xl bg-secondary hover:bg-yellow-400 shadow-xl transition-all fixed right-10 bottom-10"
