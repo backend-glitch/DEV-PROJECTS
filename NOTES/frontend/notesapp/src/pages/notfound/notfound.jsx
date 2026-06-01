@@ -39,7 +39,7 @@ const NotFound = () => {
         Back to Dashboard
       </Link>
 
-     <GithubIcon />
+     {/* <GithubIcon /> */}
     </div>
   );
 };

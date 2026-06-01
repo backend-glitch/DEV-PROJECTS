@@ -61,7 +61,7 @@ const SignUp = () => {
       navigate("/login");
       toast.success("Account Created");
 
-      <GithubIcon />
+      // <GithubIcon />
 
 
     } catch (error) {

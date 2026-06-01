@@ -43,7 +43,7 @@ try {
    
     return (
        // <div>Navbar</div>
-       <div className="bg-yellow-200 flex items-center justify-between px-6 py-2 drop-shadow">
+       <div className="bg-yellow-200 flex items-center justify-between px-6 py-2 drop-shadow ">
 
           <div style={{
               width: 32, height: 32, borderRadius: 8,

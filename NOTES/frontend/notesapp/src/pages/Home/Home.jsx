@@ -11,6 +11,7 @@ import lottieReact from "lottie-react";
 import nonoteanimation from "../../assets/nonote.json";
 import GithubIcon from "../../components/icons/GithubIcon.jsx";
 import toast from "react-hot-toast";
+import FullScreenLoader2 from "../../components/Loader/FullScreenLoader2.jsx";
 
 const Lottie = lottieReact.default;
 
@@ -42,8 +43,12 @@ const handleViewNote = (note) => {
   setViewOpen(true);
 };
 
+// rule : all hooks should be called before return
+
   const getNotes = async () => {
     try {
+
+      setLoading(true);
 
       const token = localStorage.getItem("token");
 
@@ -58,8 +63,12 @@ const handleViewNote = (note) => {
       toast.success("Welcome Back")
     } catch (error) {
       console.log("GET NOTES ERROR:", error);
+    } finally{
+      setLoading(false);
     }
   };
+
+
 
   useEffect(() => {
     getNotes();
@@ -140,6 +149,10 @@ const handleViewNote = (note) => {
   };
 
 
+    if (loading) {
+  return <FullScreenLoader2 />;
+}
+
   return (
     <>
    
@@ -183,7 +196,7 @@ const handleViewNote = (note) => {
   ))
 ) : (
 <>
-  <GithubIcon />
+ 
 
   <div className="col-span-4 flex flex-col items-center justify-center mt-10">
     <Lottie

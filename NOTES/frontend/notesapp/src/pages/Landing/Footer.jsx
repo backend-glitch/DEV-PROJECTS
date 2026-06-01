@@ -1,3 +1,4 @@
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -53,24 +54,27 @@ const T = {
               fontSize: 16, color: "#fff", fontWeight: 700,
             }}>N</div>
             <span style={{ fontSize: 18, fontWeight: 700, color: T.text, fontFamily: "'Playfair Display', Georgia, serif" }}>
-              NoteAI
+              NoteLover
             </span>
           </div>
           <p style={{ fontSize: 13, color: T.textMid, lineHeight: 1.7, maxWidth: 200 }}>
             Your second brain. Capture, organize, and act on your ideas with AI.
           </p>
-          {/* Social icons */}
+        
           <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
-            {["𝕏", "in", "G"].map((s, i) => (
-              <div key={i} style={{
-                width: 32, height: 32, borderRadius: 8,
-                border: `1px solid ${T.border}`,
-                background: T.white,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 12, fontWeight: 700, color: T.textMid,
-                cursor: "pointer",
-              }}>{s}</div>
-            ))}
+
+         
+         <a href="https://github.com/backend-glitch" target="_blank" >
+         
+            <FaGithub  className="text-4xl "></FaGithub>
+         </a>
+
+           
+<a href="https://www.linkedin.com/in/arjun-verma-100a26393" target="_blank" >
+
+  <FaLinkedin className="text-4xl" ></FaLinkedin>
+</a>
+           
           </div>
         </div>
 

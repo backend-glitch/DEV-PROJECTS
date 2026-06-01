@@ -70,7 +70,7 @@ const handleLogin = async (e) => {
  
 
 
-        console.log(res.data);
+        //console.log(res.data);
 
     } catch (error) {
 
@@ -142,7 +142,7 @@ const handleLogin = async (e) => {
         </form>
       </div>
 
- <GithubIcon />
+{/* <GithubIcon /> */}
 
     </div>
 
