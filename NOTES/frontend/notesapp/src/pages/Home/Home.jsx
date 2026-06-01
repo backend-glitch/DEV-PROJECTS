@@ -252,7 +252,7 @@ const handleViewNote = (note) => {
             backgroundColor: "rgba(0,0,0,0.8)",
           },
         }}
-        className="w-[500px] max-h-1/2 bg-white rounded-md mx-auto mt-14 p-5 overflow-hidden"
+        className="className=w-[95%] max-w-[700px] max-h-[80vh] bg-white rounded-md mx-auto mt-14 p-5 overflow-y-auto"
       >
         <AddEditNotes
           type={openAddEditNotes.type}
@@ -319,6 +319,9 @@ const handleViewNote = (note) => {
       overflow: "scroll",
     },
   }}
+
+    className="w-[95%] max-w-[700px] max-h-[80vh] bg-white rounded-md mx-auto mt-14 p-5 overflow-y-auto" 
+    
 >
 
   <h2 style={{ borderBottom: "2px solid black", paddingBottom: "8px" }}>
@@ -350,7 +353,9 @@ const handleViewNote = (note) => {
   </button>
 
 
+
 </Modal>
+
 
 
     </>
