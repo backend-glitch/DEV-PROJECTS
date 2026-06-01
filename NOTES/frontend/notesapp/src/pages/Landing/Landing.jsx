@@ -6,21 +6,21 @@ import Footer from "./Footer";
 
 
 const T = {
-  bg:         "#F5E6C8",   // warm wheat background
-  bgCard:     "#FDF3DC",   // lighter wheat for cards
-  bgDeep:     "#EDD9A3",   // deeper wheat for accents
-  accent:     "#E07B2A",   // rich orange (primary)
-  accentDark: "#B85C10",   // deep burnt orange
-  accentLight:"#F4A44A",   // light orange
-  yellow:     "#F5C518",   // vivid yellow
-  yellowLight:"#FDE882",   // pale yellow
-  yellowDeep: "#C9970A",   // golden yellow
-  text:       "#7A2E00",   // dark burnt orange text
-  textMid:    "#B05010",   // mid orange text
-  textLight:  "#C4832A",   // light orange text
-  border:     "#E8C87A",   // warm yellow border
-  borderDark: "#D4A43A",   // stronger border
-  white:      "#FFFBF0",   // warm white
+  bg:         "#F5E6C8",   
+  bgCard:     "#FDF3DC",   
+  bgDeep:     "#EDD9A3",   
+  accent:     "#E07B2A",   
+  accentDark: "#B85C10",   
+  accentLight:"#F4A44A",   
+  yellow:     "#F5C518",   
+  yellowLight:"#FDE882",   
+  yellowDeep: "#C9970A",   
+  text:       "#7A2E00",   
+  textMid:    "#B05010",  
+  textLight:  "#C4832A",   
+  border:     "#E8C87A",   
+  borderDark: "#D4A43A",   
+  white:      "#FFFBF0",   
 };
 
 const useInView = (threshold = 0.15) => {
