@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme{
+    /* color-200 */
+    --color-ui-200 :  var(--one) ;
+
+    /* color-300 */
+    --color-ui-300 : var(--two) ;
+
+    /* color-500*/
+    --color-ui-500 : var(--three);
+
+    /* color-600  */
+    --color-ui-600 : var(--four);
+
+    /* color-700 */
+    --color-ui-700 : var(--five);
+
+    /* color-400 */
+    --color-ui-400 : var(--six);
+
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+
+::selection{
+    background-color:gray;
+    color : white;
+}
+
+:root{
+    --one :  #BBF7D0;
+    --two:   #9AE6B4;
+    --three :  #22C55E;
+    --four : #16A34A;
+    --five : #15803D;
+    --six : #4ADE80;
+
+}
+
+
+[data-theme = "chilli"]{
+--one : #FECACA;
+--two: #FCA5A5;
+--three :#EF4444;
+--four: #DC2626;
+--five :  #B91C1C;
+--six : #F87171;
+}
+
+
+[data-theme = "bloom"]{
+    --one : #e9d8fd;
+      --two : #D8B4FE;
+      --three : #A855F7;
+      --four : #9333EA;
+      --five :  #7E22CE;
+      --six : #C084FC;
+}
