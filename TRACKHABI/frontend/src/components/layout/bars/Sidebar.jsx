@@ -1,6 +1,6 @@
 import {React,useState} from 'react'
 import { FaBars, FaTimes,FaGithub,FaLinkedin,FaLeaf } from "react-icons/fa";
-import { Link  } from "react-router-dom";
+import { Link ,NavLink } from "react-router-dom";
 import Theme from '../themes/Theme';
 
 const Sidebar = ({children}) => {
@@ -36,26 +36,27 @@ const Sidebar = ({children}) => {
                
               <li className="cursor-pointer text-white translate-x-0 text-2xl tex bg-ui-400 rounded-full  p-3 hover:bg-ui-500 text-center">
             
-               <Link to="/dashboard">
+               <NavLink to="/dashboard"  className={({ isActive }) => isActive && "text-3xl text-ui-600"}>
                Home
-            </Link>
+        </NavLink>
 
             </li>
 
                
               <li className="cursor-pointer text-white translate-x-0 text-2xl tex bg-ui-400 rounded-full  p-3 hover:bg-ui-500 text-center">
             
-               <Link to="/weekly">
+               <NavLink to="/weekly" className={({ isActive }) => isActive && "text-3xl text-ui-600"}>
                Grid
-            </Link>
+            </NavLink>
 
             </li>
 
               <li className="cursor-pointer text-white translate-x-0 text-2xl tex bg-ui-400 rounded-full  p-3 hover:bg-ui-500 text-center">
-               <Link to="/aiinsight">
+               <NavLink to="/aiinsight"  className={({ isActive }) => isActive && "text-3xl text-ui-600"}>
                 AI Assist
                 
-                </Link>
+                </NavLink>
+                
                 </li>
 
               <li className="cursor-pointer text-white translate-x-0 text-2xl tex bg-ui-400 rounded-full  p-3 hover:bg-ui-500 text-center">Stats</li>
