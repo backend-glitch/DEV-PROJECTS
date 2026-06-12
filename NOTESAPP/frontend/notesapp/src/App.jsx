@@ -5,7 +5,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import Landing from "./pages/Landing/Landing";
-import NotFound from "./pages/notfound/notfound";
+import NotFound from "./pages/notfound/notFound";
 
 import ProtectedRoute from "./pages/protectedroutes/protectRoute";
 import PublicRoute from "./pages/protectedroutes/publicRoute";
