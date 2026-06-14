@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import lottieReact from "lottie-react"
 import loginAnimation from "./../assets/login.json";
 import { Link ,useNavigate} from "react-router-dom";
+import FullScreenLoader from "./loading/Loading.jsx";
 
 const Lottie = lottieReact.default;
 
@@ -17,6 +18,8 @@ const navigate = useNavigate();
 
   const [emailerror, setEmailerror] = useState("");
   const[passworderror,setPassworderror] = useState("");
+
+  const [loading ,setLoading] = useState(false);
 
   const clearError = () => {
     setEmailerror("");
@@ -46,6 +49,9 @@ const navigate = useNavigate();
         clearError();
     
     try {
+
+      setLoading(true);
+
       const res = await API.post("/auth/login", { email, password });
 
       localStorage.setItem("token", res.data.token);
@@ -66,10 +72,16 @@ const navigate = useNavigate();
      // window.location.reload();
     } catch (err) {
       toast.error(" Login Failed");
+    } finally{
+      setLoading(false);
     }
   };
 
+  // if(loading) return <FullScreenLoader/>
+
   return (
+
+  
     <div className="min-h-screen flex items-center justify-center bg-green-500 gap-20 ">
         
         
@@ -117,7 +129,7 @@ const navigate = useNavigate();
           onClick={handleLogin}
           className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-200"
         >
-          Login
+          { loading ? <FullScreenLoader/> : "LOGIN" }
         </button>
 
              <p className="text-sm text-center mt-4">
@@ -132,6 +144,8 @@ const navigate = useNavigate();
 
       </div>
     </div>
+
+      
 
   );
 }

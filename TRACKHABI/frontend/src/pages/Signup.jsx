@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import lottieReact from "lottie-react"
 import signupAnimation from "./../assets/signup.json";
 import { Link ,useNavigate} from "react-router-dom";
+import FullScreenLoader from "./loading/Loading.jsx";
 
 const Lottie = lottieReact.default;
 
@@ -21,6 +22,9 @@ function Signup() {
   email : "",
   password : "",
   })
+
+  const [loading, setLoading] = useState(false);
+
 
 
   const handleSignup = async(e) => {
@@ -57,6 +61,10 @@ function Signup() {
 
     
     try {
+
+
+      setLoading(true);
+
       const res = await API.post("/auth/signup", { name,email,password });
 
       localStorage.setItem("token", res.data.token);
@@ -67,8 +75,11 @@ function Signup() {
       // window.location.reload();
     } catch (err) {
       toast.error(" Signin Failed");
+    } finally{
+      setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-500 gap-20 ">
@@ -115,7 +126,7 @@ function Signup() {
           onClick={handleSignup}
           className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-200"
         >
-          Signup
+          { loading ? <FullScreenLoader/> : "SIGNUP" }
         </button>
 
              <p className="text-sm text-center mt-4">

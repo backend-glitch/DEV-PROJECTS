@@ -3,6 +3,7 @@ import Avatar from "../avatar/Avatar";
 
 const Navbar = ({ children }) => {
 
+  const [loading,setLoading] = useState(false);
  
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -30,6 +31,7 @@ const Navbar = ({ children }) => {
 
                  <button
             onClick={() => {
+            //  setLoading(true).finally(() => setLoading(false));
               localStorage.removeItem("token");
               localStorage.removeItem("user");
               window.location.href = "/login";

@@ -6,6 +6,7 @@ import Theme from '../themes/Theme';
 const Sidebar = ({children}) => {
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [loading, setLoading] = useState(false);
   
 
   return (
@@ -36,6 +37,7 @@ const Sidebar = ({children}) => {
                
               <li className="cursor-pointer text-white translate-x-0 text-2xl tex bg-ui-400 rounded-full  p-3 hover:bg-ui-500 text-center">
             
+            
                <NavLink to="/dashboard"  className={({ isActive }) => isActive && "text-3xl text-ui-600"}>
                Home
         </NavLink>
@@ -52,8 +54,8 @@ const Sidebar = ({children}) => {
             </li>
 
               <li className="cursor-pointer text-white translate-x-0 text-2xl tex bg-ui-400 rounded-full  p-3 hover:bg-ui-500 text-center">
-               <NavLink to="/aiinsight"  className={({ isActive }) => isActive && "text-3xl text-ui-600"}>
-                AI Assist
+               <NavLink to="/Log"  className={({ isActive }) => isActive && "text-3xl text-ui-600"}>
+                Log
                 
                 </NavLink>
                 
